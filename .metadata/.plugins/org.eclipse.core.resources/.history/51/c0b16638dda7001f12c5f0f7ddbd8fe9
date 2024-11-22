@@ -1,0 +1,10 @@
+/*
+ * lcd1602.c
+ *
+ *  Created on: Nov 21, 2024
+ *      Author: user
+ *  function : 1602 LCD device control
+ */
+
+#define I2C_ADDR 0x4E	//0x27<<1
+

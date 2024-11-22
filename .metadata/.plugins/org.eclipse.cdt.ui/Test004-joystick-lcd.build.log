@@ -1,0 +1,56 @@
+16:50:44 **** Incremental Build of configuration Debug for project Test004-joystick-lcd ****
+make -j24 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:136:5: warning: implicit declaration of function 'ProgramStart' [-Wimplicit-function-declaration]
+  136 |     ProgramStart("LCD - JoyStick(Mission)");
+      |     ^~~~~~~~~~~~
+../Core/Src/main.c:137:5: warning: implicit declaration of function 'i2c_init' [-Wimplicit-function-declaration]
+  137 |     i2c_init(&hi2c2);
+      |     ^~~~~~~~
+../Core/Src/main.c:138:5: warning: implicit declaration of function 'i2c_scan' [-Wimplicit-function-declaration]
+  138 |     i2c_scan();
+      |     ^~~~~~~~
+../Core/Src/main.c:142:5: warning: implicit declaration of function 'lcd_init' [-Wimplicit-function-declaration]
+  142 |     lcd_init();
+      |     ^~~~~~~~
+../Core/Src/main.c:152:11: warning: implicit declaration of function 'sprintf' [-Wimplicit-function-declaration]
+  152 |           sprintf(buf_x, "x : %-4d",val_x);
+      |           ^~~~~~~
+../Core/Src/main.c:21:1: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+   20 | #include "main.h"
+  +++ |+#include <stdio.h>
+   21 | 
+../Core/Src/main.c:152:11: warning: incompatible implicit declaration of built-in function 'sprintf' [-Wbuiltin-declaration-mismatch]
+  152 |           sprintf(buf_x, "x : %-4d",val_x);
+      |           ^~~~~~~
+../Core/Src/main.c:152:11: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+../Core/Src/main.c:153:11: warning: implicit declaration of function 'lcd_printEx' [-Wimplicit-function-declaration]
+  153 |           lcd_printEx(buf_x,0);
+      |           ^~~~~~~~~~~
+../Core/Src/main.c:152:31: warning: '%-4d' directive writing between 4 and 11 bytes into a region of size 1 [-Wformat-overflow=]
+  152 |           sprintf(buf_x, "x : %-4d",val_x);
+      |                               ^~~~
+../Core/Src/main.c:152:11: note: 'sprintf' output between 9 and 16 bytes into a destination of size 5
+  152 |           sprintf(buf_x, "x : %-4d",val_x);
+      |           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:155:31: warning: '%-4d' directive writing between 4 and 11 bytes into a region of size 1 [-Wformat-overflow=]
+  155 |           sprintf(buf_y, "Y : %-4d",val_y);
+      |                               ^~~~
+../Core/Src/main.c:155:11: note: 'sprintf' output between 9 and 16 bytes into a destination of size 5
+  155 |           sprintf(buf_y, "Y : %-4d",val_y);
+      |           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "Test004-joystick-lcd.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\user\source\repos\STM32\Test004-joystick-lcd\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Test004-joystick-lcd.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Test004-joystick-lcd.elf
+ 
+arm-none-eabi-size  Test004-joystick-lcd.elf 
+arm-none-eabi-objdump -h -S Test004-joystick-lcd.elf  > "Test004-joystick-lcd.list"
+   text	   data	    bss	    dec	    hex	filename
+  40664	    476	   2236	  43376	   a970	Test004-joystick-lcd.elf
+Finished building: default.size.stdout
+ 
+Finished building: Test004-joystick-lcd.list
+ 
+
+16:50:44 Build Finished. 0 errors, 9 warnings. (took 691ms)
+

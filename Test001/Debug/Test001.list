@@ -39,13 +39,13 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  17 .debug_macro  000152c0  00000000  00000000  000291fb  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_line   000079f8  00000000  00000000  0003e4bb  2**0
+ 18 .debug_line   00007a11  00000000  00000000  0003e4bb  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .debug_str    00085515  00000000  00000000  00045eb3  2**0
+ 19 .debug_str    00085515  00000000  00000000  00045ecc  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 20 .debug_frame  000018b8  00000000  00000000  000cb3c8  2**2
+ 20 .debug_frame  000018b8  00000000  00000000  000cb3e4  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 21 .debug_line_str 00000057  00000000  00000000  000ccc80  2**0
+ 21 .debug_line_str 00000057  00000000  00000000  000ccc9c  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -395,53 +395,50 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
  8000500:	f5b3 7f80 	cmp.w	r3, #256	; 0x100
  8000504:	d003      	beq.n	800050e <HAL_GPIO_EXTI_Callback+0x1a>
  8000506:	f5b3 5f00 	cmp.w	r3, #8192	; 0x2000
- 800050a:	d00e      	beq.n	800052a <HAL_GPIO_EXTI_Callback+0x36>
+ 800050a:	d010      	beq.n	800052e <HAL_GPIO_EXTI_Callback+0x3a>
 			mode = mode?0:1;
 		break;
 
 	}
 
 }
- 800050c:	e019      	b.n	8000542 <HAL_GPIO_EXTI_Callback+0x4e>
-		delay_t -= 100;
+ 800050c:	e01a      	b.n	8000544 <HAL_GPIO_EXTI_Callback+0x50>
+		delay_t -= (delay_t <100) ? 500 : delay_t -100;
  800050e:	4b10      	ldr	r3, [pc, #64]	; (8000550 <HAL_GPIO_EXTI_Callback+0x5c>)
  8000510:	681b      	ldr	r3, [r3, #0]
- 8000512:	3b64      	subs	r3, #100	; 0x64
- 8000514:	4a0e      	ldr	r2, [pc, #56]	; (8000550 <HAL_GPIO_EXTI_Callback+0x5c>)
- 8000516:	6013      	str	r3, [r2, #0]
-			if(delay_t <100)
- 8000518:	4b0d      	ldr	r3, [pc, #52]	; (8000550 <HAL_GPIO_EXTI_Callback+0x5c>)
- 800051a:	681b      	ldr	r3, [r3, #0]
- 800051c:	2b63      	cmp	r3, #99	; 0x63
- 800051e:	dc0f      	bgt.n	8000540 <HAL_GPIO_EXTI_Callback+0x4c>
-				delay_t = 500;
- 8000520:	4b0b      	ldr	r3, [pc, #44]	; (8000550 <HAL_GPIO_EXTI_Callback+0x5c>)
- 8000522:	f44f 72fa 	mov.w	r2, #500	; 0x1f4
- 8000526:	601a      	str	r2, [r3, #0]
+ 8000512:	2b63      	cmp	r3, #99	; 0x63
+ 8000514:	dd03      	ble.n	800051e <HAL_GPIO_EXTI_Callback+0x2a>
+ 8000516:	4b0e      	ldr	r3, [pc, #56]	; (8000550 <HAL_GPIO_EXTI_Callback+0x5c>)
+ 8000518:	681b      	ldr	r3, [r3, #0]
+ 800051a:	3b64      	subs	r3, #100	; 0x64
+ 800051c:	e001      	b.n	8000522 <HAL_GPIO_EXTI_Callback+0x2e>
+ 800051e:	f44f 73fa 	mov.w	r3, #500	; 0x1f4
+ 8000522:	4a0b      	ldr	r2, [pc, #44]	; (8000550 <HAL_GPIO_EXTI_Callback+0x5c>)
+ 8000524:	6812      	ldr	r2, [r2, #0]
+ 8000526:	1ad3      	subs	r3, r2, r3
+ 8000528:	4a09      	ldr	r2, [pc, #36]	; (8000550 <HAL_GPIO_EXTI_Callback+0x5c>)
+ 800052a:	6013      	str	r3, [r2, #0]
 		break;
- 8000528:	e00a      	b.n	8000540 <HAL_GPIO_EXTI_Callback+0x4c>
+ 800052c:	e00a      	b.n	8000544 <HAL_GPIO_EXTI_Callback+0x50>
 			mode = mode?0:1;
- 800052a:	4b0a      	ldr	r3, [pc, #40]	; (8000554 <HAL_GPIO_EXTI_Callback+0x60>)
- 800052c:	681b      	ldr	r3, [r3, #0]
- 800052e:	2b00      	cmp	r3, #0
- 8000530:	bf0c      	ite	eq
- 8000532:	2301      	moveq	r3, #1
- 8000534:	2300      	movne	r3, #0
- 8000536:	b2db      	uxtb	r3, r3
- 8000538:	461a      	mov	r2, r3
- 800053a:	4b06      	ldr	r3, [pc, #24]	; (8000554 <HAL_GPIO_EXTI_Callback+0x60>)
- 800053c:	601a      	str	r2, [r3, #0]
+ 800052e:	4b09      	ldr	r3, [pc, #36]	; (8000554 <HAL_GPIO_EXTI_Callback+0x60>)
+ 8000530:	681b      	ldr	r3, [r3, #0]
+ 8000532:	2b00      	cmp	r3, #0
+ 8000534:	bf0c      	ite	eq
+ 8000536:	2301      	moveq	r3, #1
+ 8000538:	2300      	movne	r3, #0
+ 800053a:	b2db      	uxtb	r3, r3
+ 800053c:	461a      	mov	r2, r3
+ 800053e:	4b05      	ldr	r3, [pc, #20]	; (8000554 <HAL_GPIO_EXTI_Callback+0x60>)
+ 8000540:	601a      	str	r2, [r3, #0]
 		break;
- 800053e:	e000      	b.n	8000542 <HAL_GPIO_EXTI_Callback+0x4e>
-		break;
- 8000540:	bf00      	nop
-}
  8000542:	bf00      	nop
- 8000544:	370c      	adds	r7, #12
- 8000546:	46bd      	mov	sp, r7
- 8000548:	f85d 7b04 	ldr.w	r7, [sp], #4
- 800054c:	4770      	bx	lr
- 800054e:	bf00      	nop
+}
+ 8000544:	bf00      	nop
+ 8000546:	370c      	adds	r7, #12
+ 8000548:	46bd      	mov	sp, r7
+ 800054a:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 800054e:	4770      	bx	lr
  8000550:	20000000 	.word	0x20000000
  8000554:	20000074 	.word	0x20000074
 
