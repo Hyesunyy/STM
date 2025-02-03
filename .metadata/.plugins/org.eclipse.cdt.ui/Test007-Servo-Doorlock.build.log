@@ -1,0 +1,67 @@
+14:17:24 **** Incremental Build of configuration Debug for project Test007-Servo-Doorlock ****
+make -j24 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I"C:/Users/user/source/repos/STM32/myLib" -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:119:3: warning: implicit declaration of function 'ProgramStart' [-Wimplicit-function-declaration]
+  119 |   ProgramStart("Mission - DoorLock");
+      |   ^~~~~~~~~~~~
+../Core/Src/main.c:205:13: error: invalid storage class for function 'MX_TIM1_Init'
+  205 | static void MX_TIM1_Init(void)
+      |             ^~~~~~~~~~~~
+../Core/Src/main.c:280:13: error: invalid storage class for function 'MX_TIM2_Init'
+  280 | static void MX_TIM2_Init(void)
+      |             ^~~~~~~~~~~~
+../Core/Src/main.c:325:13: error: invalid storage class for function 'MX_TIM3_Init'
+  325 | static void MX_TIM3_Init(void)
+      |             ^~~~~~~~~~~~
+../Core/Src/main.c:384:13: error: invalid storage class for function 'MX_USART2_UART_Init'
+  384 | static void MX_USART2_UART_Init(void)
+      |             ^~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:417:13: error: invalid storage class for function 'MX_GPIO_Init'
+  417 | static void MX_GPIO_Init(void)
+      |             ^~~~~~~~~~~~
+../Core/Src/main.c:476:1: error: expected declaration or statement at end of input
+  476 | }
+      | ^
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:55:13: warning: 'MX_GPIO_Init' used but never defined
+   55 | static void MX_GPIO_Init(void);
+      |             ^~~~~~~~~~~~
+../Core/Src/main.c:56:13: warning: 'MX_USART2_UART_Init' used but never defined
+   56 | static void MX_USART2_UART_Init(void);
+      |             ^~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:57:13: warning: 'MX_TIM1_Init' used but never defined
+   57 | static void MX_TIM1_Init(void);
+      |             ^~~~~~~~~~~~
+../Core/Src/main.c:58:13: warning: 'MX_TIM3_Init' used but never defined
+   58 | static void MX_TIM3_Init(void);
+      |             ^~~~~~~~~~~~
+../Core/Src/main.c:59:13: warning: 'MX_TIM2_Init' used but never defined
+   59 | static void MX_TIM2_Init(void);
+      |             ^~~~~~~~~~~~
+../Core/Src/main.c:467:6: warning: 'Error_Handler' defined but not used [-Wunused-function]
+  467 | void Error_Handler(void)
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:417:13: warning: 'MX_GPIO_Init' defined but not used [-Wunused-function]
+  417 | static void MX_GPIO_Init(void)
+      |             ^~~~~~~~~~~~
+../Core/Src/main.c:384:13: warning: 'MX_USART2_UART_Init' defined but not used [-Wunused-function]
+  384 | static void MX_USART2_UART_Init(void)
+      |             ^~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:325:13: warning: 'MX_TIM3_Init' defined but not used [-Wunused-function]
+  325 | static void MX_TIM3_Init(void)
+      |             ^~~~~~~~~~~~
+../Core/Src/main.c:280:13: warning: 'MX_TIM2_Init' defined but not used [-Wunused-function]
+  280 | static void MX_TIM2_Init(void)
+      |             ^~~~~~~~~~~~
+../Core/Src/main.c:205:13: warning: 'MX_TIM1_Init' defined but not used [-Wunused-function]
+  205 | static void MX_TIM1_Init(void)
+      |             ^~~~~~~~~~~~
+../Core/Src/main.c:158:6: warning: 'SystemClock_Config' defined but not used [-Wunused-function]
+  158 | void SystemClock_Config(void)
+      |      ^~~~~~~~~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:40: Core/Src/main.o] Error 1
+"make -j24 all" terminated with exit code 2. Build might be incomplete.
+
+14:17:24 Build Failed. 7 errors, 13 warnings. (took 304ms)
+

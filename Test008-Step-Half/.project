@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>Test008-Step.ioc</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+	</buildSpec>
+	<natures>
+		<nature>com.st.stm32cube.ide.mcu.MCUProjectNature</nature>
+		<nature>com.st.stm32cube.ide.mcu.MCUCubeProjectNature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>Core/Src/myLib.c</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/myLib/myLib.c</locationURI>
+		</link>
+	</linkedResources>
+</projectDescription>

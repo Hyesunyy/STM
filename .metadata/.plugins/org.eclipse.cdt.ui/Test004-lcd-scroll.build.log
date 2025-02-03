@@ -1,0 +1,10 @@
+15:27:57 **** Incremental Build of configuration Debug for project Test004-lcd-scroll ****
+make -j24 all 
+arm-none-eabi-size  Test004-lcd-scroll.elf 
+   text	   data	    bss	    dec	    hex	filename
+  20272	    112	   2088	  22472	   57c8	Test004-lcd-scroll.elf
+Finished building: default.size.stdout
+ 
+
+15:27:57 Build Finished. 0 errors, 0 warnings. (took 257ms)
+

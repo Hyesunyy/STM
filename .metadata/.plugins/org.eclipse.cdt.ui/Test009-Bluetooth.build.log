@@ -1,0 +1,10 @@
+14:44:48 **** Incremental Build of configuration Debug for project Test009-Bluetooth ****
+make -j24 all 
+arm-none-eabi-size  Test009-Bluetooth.elf 
+   text	   data	    bss	    dec	    hex	filename
+  19992	    112	   2456	  22560	   5820	Test009-Bluetooth.elf
+Finished building: default.size.stdout
+ 
+
+14:44:48 Build Finished. 0 errors, 0 warnings. (took 229ms)
+

@@ -1,0 +1,10 @@
+12:49:47 **** Build of configuration Debug for project Test006-uSonic-intr ****
+make -j24 all 
+arm-none-eabi-size  Test006-uSonic-intr.elf 
+   text	   data	    bss	    dec	    hex	filename
+  34840	    476	   2136	  37452	   924c	Test006-uSonic-intr.elf
+Finished building: default.size.stdout
+ 
+
+12:49:47 Build Finished. 0 errors, 0 warnings. (took 285ms)
+

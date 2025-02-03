@@ -7,6 +7,7 @@
  */
 
 #include "main.h"
+#include <stdio.h>
 extern I2C_HandleTypeDef *hi2c;
 //extern I2C_HandleTypeDef hi2c2; // 이거보단 포인터 타입이 낫다
 
@@ -85,5 +86,25 @@ void lcd_printEx(char *str, int ln)
 	if(ln) lcd_command(0xc0);
 	lcd_print(str);
 }
+int ln2 = 0; //current line number
+char sBuf[20]; // 2nd line string
+void lcd_printEx2(char *str)
+{
+	if(ln2 == 0)
+	{
+		lcd_command(0x80);
+		ln2++;
+		//return;
+	}
+	else if(ln2 ==1)
+	{
+		lcd_command(0x80);
+		lcd_print(sBuf);
 
+		lcd_command(0xc0);
+		strcpy(sBuf,str);
+		//return;
+	}
+	lcd_print(str);
+}
 

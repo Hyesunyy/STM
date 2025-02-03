@@ -5,8 +5,25 @@
  *      Author: user
  */
 #include "main.h"
+#include <stdio.h>
 extern UART_HandleTypeDef huart2;
-//int __io_getchar(void)
+
+
+int __io_getchar(void)
+{
+	char ch;
+	while(HAL_UART_Receive(&huart2, &ch, 1, 10)!= HAL_OK);
+	HAL_UART_Transmit(&huart2, &ch, 1, 10); //echo, 푸티로 재전송
+	if(ch == '\r')HAL_UART_Transmit(&huart2,"\n", 1, 10);//다음 줄로 바꿔주기
+	return ch;
+
+	/*while(1)
+	{
+		if(HAL_UART_Receive(&huart2, &ch, 1, 10)== HAL_OK) break;
+	}*/
+
+}
+
 int __io_putchar(int ch)
 {
 	HAL_UART_Transmit(&huart2, &ch, 1, 10 );
@@ -29,6 +46,7 @@ void ProgramStart(char * str)
 	printf("Program Start - %s\r\n",str);
 	printf("Press Blue-button(B1) to Start...\r\n");
 	StandBy();
+	setvbuf(stdin, NULL,_IONBF,0 );// buffer clear
 }
 void cls()
 {

@@ -1,0 +1,10 @@
+18:21:51 **** Incremental Build of configuration Debug for project Test002-Timer-mission ****
+make -j24 all 
+arm-none-eabi-size  Test002-Timer-mission.elf 
+   text	   data	    bss	    dec	    hex	filename
+  36024	    476	   2136	  38636	   96ec	Test002-Timer-mission.elf
+Finished building: default.size.stdout
+ 
+
+18:21:51 Build Finished. 0 errors, 0 warnings. (took 233ms)
+
