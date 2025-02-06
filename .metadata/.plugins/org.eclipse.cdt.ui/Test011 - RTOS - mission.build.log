@@ -1,0 +1,64 @@
+19:49:42 **** Incremental Build of configuration Debug for project Test011 - RTOS - mission ****
+make -j24 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'Distance':
+../Core/Src/main.c:107:3: warning: this 'while' clause does not guard... [-Wmisleading-indentation]
+  107 |   while(HAL_GPIO_ReadPin(Echo_GPIO_Port, Echo_Pin)==0);
+      |   ^~~~~
+../Core/Src/main.c:108:11: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'while'
+  108 |           t1 = htim2.Instance->CNT;
+      |           ^~
+../Core/Src/main.c:110:3: warning: this 'while' clause does not guard... [-Wmisleading-indentation]
+  110 |   while(HAL_GPIO_ReadPin(Echo_GPIO_Port, Echo_Pin)==1);
+      |   ^~~~~
+../Core/Src/main.c:111:11: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'while'
+  111 |           t2 = htim2.Instance->CNT;
+      |           ^~
+../Core/Src/main.c:102:7: warning: unused variable 't0' [-Wunused-variable]
+  102 |   int t0 = 0, t1, t2;
+      |       ^~
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:206:3: warning: implicit declaration of function 'ProgramStart' [-Wimplicit-function-declaration]
+  206 |   ProgramStart("RTOS Mission");
+      |   ^~~~~~~~~~~~
+../Core/Src/main.c: In function 'StartDefaultTask':
+../Core/Src/main.c:427:19: warning: implicit declaration of function 'printf' [-Wimplicit-function-declaration]
+  427 |                   printf("Task 01 (Normal)Ultra Sonic Sensor \r\n");
+      |                   ^~~~~~
+../Core/Src/main.c:22:1: note: include '<stdio.h>' or provide a declaration of 'printf'
+   21 | #include "cmsis_os.h"
+  +++ |+#include <stdio.h>
+   22 | 
+../Core/Src/main.c:427:19: warning: incompatible implicit declaration of built-in function 'printf' [-Wbuiltin-declaration-mismatch]
+  427 |                   printf("Task 01 (Normal)Ultra Sonic Sensor \r\n");
+      |                   ^~~~~~
+../Core/Src/main.c:427:19: note: include '<stdio.h>' or provide a declaration of 'printf'
+../Core/Src/main.c: In function 'StartTask02':
+../Core/Src/main.c:458:19: warning: incompatible implicit declaration of built-in function 'printf' [-Wbuiltin-declaration-mismatch]
+  458 |                   printf("Task 02 (Low) Step Motor \r\n");
+      |                   ^~~~~~
+../Core/Src/main.c:458:19: note: include '<stdio.h>' or provide a declaration of 'printf'
+../Core/Src/main.c: In function 'StartTask03':
+../Core/Src/main.c:535:4: warning: incompatible implicit declaration of built-in function 'printf' [-Wbuiltin-declaration-mismatch]
+  535 |   {printf(" 03  \r\n");
+      |    ^~~~~~
+../Core/Src/main.c:535:4: note: include '<stdio.h>' or provide a declaration of 'printf'
+../Core/Src/main.c: In function 'StartTask04':
+../Core/Src/main.c:567:19: warning: incompatible implicit declaration of built-in function 'printf' [-Wbuiltin-declaration-mismatch]
+  567 |                   printf("Task 04 (Below Normal)putty \r\n");
+      |                   ^~~~~~
+../Core/Src/main.c:567:19: note: include '<stdio.h>' or provide a declaration of 'printf'
+arm-none-eabi-gcc -o "Test011 - RTOS - mission.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\user\source\repos\STM32\Test011 - RTOS - mission\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Test011 - RTOS - mission.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Test011 - RTOS - mission.elf
+ 
+arm-none-eabi-size  Test011\ -\ RTOS\ -\ mission.elf 
+arm-none-eabi-objdump -h -S Test011\ -\ RTOS\ -\ mission.elf  > "Test011 - RTOS - mission.list"
+   text	   data	    bss	    dec	    hex	filename
+  47088	    480	  18528	  66096	  10230	Test011 - RTOS - mission.elf
+Finished building: default.size.stdout
+ 
+Finished building: Test011 - RTOS - mission.list
+ 
+
+19:49:43 Build Finished. 0 errors, 9 warnings. (took 735ms)
+

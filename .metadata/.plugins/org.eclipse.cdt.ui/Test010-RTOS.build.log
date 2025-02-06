@@ -1,0 +1,53 @@
+13:14:37 **** Incremental Build of configuration Debug for project Test010-RTOS ****
+make -j24 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'HAL_GPIO_EXTI_Callback':
+../Core/Src/main.c:77:9: warning: implicit declaration of function 'printf' [-Wimplicit-function-declaration]
+   77 |         printf("cnt = %d\r\n",cnt);
+      |         ^~~~~~
+../Core/Src/main.c:22:1: note: include '<stdio.h>' or provide a declaration of 'printf'
+   21 | #include "cmsis_os.h"
+  +++ |+#include <stdio.h>
+   22 | 
+../Core/Src/main.c:77:9: warning: incompatible implicit declaration of built-in function 'printf' [-Wbuiltin-declaration-mismatch]
+   77 |         printf("cnt = %d\r\n",cnt);
+      |         ^~~~~~
+../Core/Src/main.c:77:9: note: include '<stdio.h>' or provide a declaration of 'printf'
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:162:3: warning: implicit declaration of function 'ProgramStart' [-Wimplicit-function-declaration]
+  162 |   ProgramStart("RTOS Test......");
+      |   ^~~~~~~~~~~~
+../Core/Src/main.c: In function 'myStartTask01':
+../Core/Src/main.c:321:19: warning: incompatible implicit declaration of built-in function 'printf' [-Wbuiltin-declaration-mismatch]
+  321 |                   printf("Task 01 (Normal)-------------------------\r\n");
+      |                   ^~~~~~
+../Core/Src/main.c:321:19: note: include '<stdio.h>' or provide a declaration of 'printf'
+../Core/Src/main.c: In function 'myStartTask02':
+../Core/Src/main.c:349:19: warning: incompatible implicit declaration of built-in function 'printf' [-Wbuiltin-declaration-mismatch]
+  349 |                   printf("Task 02 (Below Normal)--------------------\r\n");
+      |                   ^~~~~~
+../Core/Src/main.c:349:19: note: include '<stdio.h>' or provide a declaration of 'printf'
+../Core/Src/main.c: In function 'StartTask03':
+../Core/Src/main.c:373:19: warning: incompatible implicit declaration of built-in function 'printf' [-Wbuiltin-declaration-mismatch]
+  373 |                   printf("Task 03 (Low)--------------------\r\n");
+      |                   ^~~~~~
+../Core/Src/main.c:373:19: note: include '<stdio.h>' or provide a declaration of 'printf'
+../Core/Src/main.c: In function 'StartTask04':
+../Core/Src/main.c:397:19: warning: incompatible implicit declaration of built-in function 'printf' [-Wbuiltin-declaration-mismatch]
+  397 |                   printf("Task 04 (Idle)-------------\r\n");
+      |                   ^~~~~~
+../Core/Src/main.c:397:19: note: include '<stdio.h>' or provide a declaration of 'printf'
+arm-none-eabi-gcc -o "Test010-RTOS.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\user\source\repos\STM32\Test010-RTOS\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Test010-RTOS.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Test010-RTOS.elf
+ 
+arm-none-eabi-size  Test010-RTOS.elf 
+arm-none-eabi-objdump -h -S Test010-RTOS.elf  > "Test010-RTOS.list"
+   text	   data	    bss	    dec	    hex	filename
+  27516	    116	  18452	  46084	   b404	Test010-RTOS.elf
+Finished building: default.size.stdout
+ 
+Finished building: Test010-RTOS.list
+ 
+
+13:14:38 Build Finished. 0 errors, 7 warnings. (took 736ms)
+

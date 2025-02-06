@@ -10,7 +10,7 @@
 		<item key="updateReferences" value="true"/>
 	</section>
 	<section name="OptionalMessageDialog.hide.">
-		<item key="askReindex.detail" value="1"/>
+		<item key="askReindex.detail" value="0"/>
 	</section>
 	<section name="org.eclipse.cdt.ui.OPEN_ACTION_SELECTION_DIALOG_SECTION">
 		<item key="DIALOG_X_ORIGIN" value="570"/>
@@ -25,5 +25,9 @@
 		<list key="previousPatterns">
 			<item value="irq"/>
 		</list>
+	</section>
+	<section name="org.eclipse.cdt.ui.text.hover.CMacroExpansionExploration.internal">
+		<item key="size.width" value="810"/>
+		<item key="size.height" value="180"/>
 	</section>
 </section>
