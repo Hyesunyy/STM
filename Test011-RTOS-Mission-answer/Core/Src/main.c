@@ -42,6 +42,7 @@
 
 /* Private variables ---------------------------------------------------------*/
 TIM_HandleTypeDef htim2;
+TIM_HandleTypeDef htim3;
 
 UART_HandleTypeDef huart2;
 
@@ -59,6 +60,7 @@ void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_USART2_UART_Init(void);
 static void MX_TIM2_Init(void);
+static void MX_TIM3_Init(void);
 void StartTask01(void const * argument);
 void StartTask02(void const * argument);
 void StartTask03(void const * argument);
@@ -142,6 +144,7 @@ int main(void)
   MX_GPIO_Init();
   MX_USART2_UART_Init();
   MX_TIM2_Init();
+  MX_TIM3_Init();
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */
@@ -188,6 +191,9 @@ int main(void)
   /* add threads, ... */
   ProgramStart("RTOS - mission");
   HAL_TIM_Base_Start(&htim2);
+  HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_1);
+  HAL_GPIO_WritePin(Dir_A1_GPIO_Port, Dir_A1_Pin,1);
+  HAL_GPIO_WritePin(Dir_A2_GPIO_Port, Dir_A2_Pin,0);
   osSemaphoreRelease(myBinarySem01Handle);
   /* USER CODE END RTOS_THREADS */
 
@@ -299,6 +305,65 @@ static void MX_TIM2_Init(void)
 }
 
 /**
+  * @brief TIM3 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_TIM3_Init(void)
+{
+
+  /* USER CODE BEGIN TIM3_Init 0 */
+
+  /* USER CODE END TIM3_Init 0 */
+
+  TIM_ClockConfigTypeDef sClockSourceConfig = {0};
+  TIM_MasterConfigTypeDef sMasterConfig = {0};
+  TIM_OC_InitTypeDef sConfigOC = {0};
+
+  /* USER CODE BEGIN TIM3_Init 1 */
+
+  /* USER CODE END TIM3_Init 1 */
+  htim3.Instance = TIM3;
+  htim3.Init.Prescaler = 84-1;
+  htim3.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim3.Init.Period = 1000-1;
+  htim3.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim3.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+  if (HAL_TIM_Base_Init(&htim3) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
+  if (HAL_TIM_ConfigClockSource(&htim3, &sClockSourceConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  if (HAL_TIM_PWM_Init(&htim3) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+  if (HAL_TIMEx_MasterConfigSynchronization(&htim3, &sMasterConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sConfigOC.OCMode = TIM_OCMODE_PWM1;
+  sConfigOC.Pulse = 0;
+  sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
+  sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
+  if (HAL_TIM_PWM_ConfigChannel(&htim3, &sConfigOC, TIM_CHANNEL_1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN TIM3_Init 2 */
+
+  /* USER CODE END TIM3_Init 2 */
+  HAL_TIM_MspPostInit(&htim3);
+
+}
+
+/**
   * @brief USART2 Initialization Function
   * @param None
   * @retval None
@@ -352,7 +417,7 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, IN4_Pin|IN1_Pin|Trig_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOB, IN4_Pin|Dir_A1_Pin|Dir_A2_Pin|Trig_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin : B1_Pin */
   GPIO_InitStruct.Pin = B1_Pin;
@@ -373,21 +438,15 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(Echo_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : IN4_Pin IN1_Pin Trig_Pin */
-  GPIO_InitStruct.Pin = IN4_Pin|IN1_Pin|Trig_Pin;
+  /*Configure GPIO pins : IN4_Pin Dir_A1_Pin Dir_A2_Pin Trig_Pin */
+  GPIO_InitStruct.Pin = IN4_Pin|Dir_A1_Pin|Dir_A2_Pin|Trig_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : IN3_Pin IN2_Pin */
-  GPIO_InitStruct.Pin = IN3_Pin|IN2_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
-
   /* EXTI interrupt init*/
-  HAL_NVIC_SetPriority(EXTI9_5_IRQn, 0, 0);
+  HAL_NVIC_SetPriority(EXTI9_5_IRQn, 5, 0);
   HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
 
 /* USER CODE BEGIN MX_GPIO_Init_2 */
@@ -450,6 +509,7 @@ void StartTask02(void const * argument)
 * @param argument: Not used
 * @retval None
 */
+int dr = 30, dr1 = 30, dr2 = 50, dr3 = 90;
 /* USER CODE END Header_StartTask03 */
 void StartTask03(void const * argument)
 {
@@ -459,8 +519,26 @@ void StartTask03(void const * argument)
   {
 	  if(osSemaphoreWait(myBinarySem01Handle,0)==osOK)
 		  {
+		  	  if(dist < 500)//break
+		  	  {
+		  		  dr = 0; //power = 0
+		  	  }
 
-			  osSemaphoreRelease(myBinarySem01Handle);
+		  	  if(dist < 1000)//mm
+		  	  {
+		  		 dr = dr1;
+		  	  }
+		  	  else if(dist < 2000)
+		  	  {
+		  		  dr = dr2;
+		  	  }
+		  	  else
+		  	  {
+		  		  dr = dr3;
+		  	  }
+		  	  htim3.Instance->CCR1 = htim3.Instance->ARR*dr/100; //[%]
+			  HAL_Delay(100);
+		  	  osSemaphoreRelease(myBinarySem01Handle);
 		  }
     osDelay(1);
   }
